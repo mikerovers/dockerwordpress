@@ -1,0 +1,39 @@
+version: '3.1'
+
+services:
+    wordpress: 
+        image: wordpress:4-php7.1-apache
+        tty: true
+        restart: always
+        links:
+            - mysql
+        volumes:
+            - ./wordpress/wp-content/:/var/www/html/wp-content
+        environment:
+            WORDPRESS_DB_PASSWORD: password
+        ports:
+            - "80:80"
+            - "443:443"
+        depends_on:
+            - mysql
+        networks:
+            - back
+
+    mysql:
+        image: mysql:5.7
+        restart: always
+        ports:
+            - "3306:3306"
+        environment:
+            - MYSQL_ROOT_PASSWORD=password
+            - MYSQL_DATABASE=wordpress
+        volumes:
+            - db_data:/var/lib/mysql
+        networks:
+            - back
+
+networks: 
+    back:
+
+volumes:
+    db_data:

@@ -1,2 +1,2 @@
 # dockerwordpress
-Quick docker container for Wordpress plugin development
+Quick docker container for Wordpress plugin development.
