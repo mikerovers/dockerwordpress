@@ -32,6 +32,20 @@ services:
         networks:
             - back
 
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        depends_on:
+            - mysql
+        restart: always
+        ports:
+            - "8080:80"
+        environment:
+            PMA_HOST: mysql
+            MYSQL_ROOT_PASSWORD: password
+        networks:
+            - back
+        
+
 networks: 
     back:
 
